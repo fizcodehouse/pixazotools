@@ -1,0 +1,469 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f1117;
+  --bg-card: #1a1d27;
+  --bg-input: #22253a;
+  --border: #2e3248;
+  --text: #e4e6f0;
+  --text-dim: #8e92a8;
+  --accent: #6c63ff;
+  --accent-hover: #7b73ff;
+  --success: #34d399;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Layout ─────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ─── Header ─────────────────────────────────── */
+.app-header {
+  text-align: center;
+  padding: 24px 0 16px;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-subtitle {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* ─── API Key Row ─────────────────────────────── */
+.api-key-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+
+.api-key-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.api-key-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.api-key-input:focus {
+  border-color: var(--accent);
+}
+
+.btn-toggle-key {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-dim);
+  transition: background 0.2s;
+}
+
+.btn-toggle-key:hover {
+  background: var(--bg-input);
+}
+
+/* ─── Tab Navigation ─────────────────────────── */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  margin-top: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: var(--bg-input);
+  color: var(--text);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tab-icon {
+  font-size: 1.1rem;
+}
+
+/* ─── Main Content ───────────────────────────── */
+.app-main {
+  flex: 1;
+  margin-top: 20px;
+}
+
+.tab-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.tab-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ─── Form ───────────────────────────────────── */
+.sync-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Two-column song layout */
+.sync-form-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sync-form-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sync-form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .sync-form-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.form-group .required {
+  color: var(--error);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+}
+
+.form-group-textarea {
+  flex: 1;
+}
+
+.form-group-textarea textarea {
+  flex: 1;
+  min-height: 320px;
+  resize: vertical;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form-group .hint {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ─── Buttons ────────────────────────────────── */
+.btn-generate {
+  align-self: flex-start;
+  padding: 10px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-generate:hover {
+  background: var(--accent-hover);
+}
+
+.btn-generate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--success);
+  color: #000;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+  margin-top: 8px;
+}
+
+.btn-download:hover {
+  opacity: 0.85;
+}
+
+/* ─── Progress Bar ───────────────────────────── */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.progress-fill.indeterminate {
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #a78bfa);
+  border-radius: 4px;
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+/* ─── Polling Status ─────────────────────────── */
+.polling-status {
+  margin-top: 16px;
+}
+
+.status-text {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+/* ─── Result ─────────────────────────────────── */
+.result-box {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.result-image {
+  display: block;
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
+.result-video {
+  display: block;
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
+.result-audio {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.raw-response {
+  background: var(--bg-input);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 8px;
+}
+
+/* ─── Error ──────────────────────────────────── */
+.error-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid var(--error);
+  border-radius: var(--radius-sm);
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+/* ─── No Key Message ─────────────────────────── */
+.no-key-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.no-key-message h2 {
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.no-key-message p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* ─── Footer ─────────────────────────────────── */
+.app-footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.app-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 640px) {
+  .app {
+    padding: 8px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .api-key-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .api-key-label {
+    text-align: left;
+  }
+
+  .tab-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .tab-content {
+    padding: 16px;
+  }
+
+  .tab-content h2 {
+    font-size: 1.2rem;
+  }
+}
